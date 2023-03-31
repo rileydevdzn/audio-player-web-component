@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Montserrat, sans-serif;
+}
+
+article {
+  width: 235px;
+  height: 275px;
+  background-color: hsla(0, 0%, 100%, 0.2);
+  border-radius: 24px;
+  box-shadow: 4px 4px 12px 0 rgba(0, 0 , 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: space-between;
+  padding: 2rem 0 1rem 0;
+}
+
+.soundcard-info {
+  width: 170px;
+  height: 140px;
+  border-radius: 16px;
+  border: 1px solid red;
+  position: relative;
+  z-index: 2;
+  background-color: hsla(0, 0%, 0%, 0.2);
+}
+
+.soundcard-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+.soundcard-title {
+  width: 90%;
+  color: #fafafa;
+  position: absolute;
+  top: calc(50% - 44px);
+  left: calc(50% - 76.5px);
+  text-align: center;
+  z-index: 3;
+}
+
+h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  margin: 20px 0;
+}

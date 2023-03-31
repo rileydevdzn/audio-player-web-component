@@ -3,169 +3,184 @@
   <head>
     <meta charset="UTF-8">
     <title>EQ Audio Player</title>
+    <link rel="stylesheet" href="./style.css">
   </head>
 
   <body>
     <main>
-      <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/beach-sample.mp3?raw=true"></audio-player>
-
-      <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/crickets-sample.mp3?raw=true"></audio-player>
-
-      <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/mantrachants-sample.mp3?raw=true"></audio-player>
-
-      <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/rainstorm-sample.mp3?raw=true"></audio-player>
-
-      <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/oceangulls-sample.mp3?raw=true"></audio-player>
-
-
-      <template>
-        <style>
-          #audio-player-container {
-            --seek-before-width: 0%;
-            --volume-before-width: 100%;
-            --buffered-width: 0%;
-          }
-          .audio-player {
-            width: 235px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-          .btn-play {
-            width: 50px;
-            height: 50px;
-            padding: 8px;
-            border: none;
-            border-radius: 50%;
-            background-color: transparent;
-            cursor: pointer;
-          }
-          path {
-            stroke: #166351;
-          }
-          .range-slider {
-            margin-left: 22px;
-          }
-          .time {
-            display: inline-block;
-            width: 37px;
-            text-align: center;
-            font-size: 18px;
-            margin-top: 30.5px;
-            float: left;
-          }
-          input[type="range"] {
-            position: relative;
-            -webkit-appearance: none;
-            width: 48%;
-            margin: 0;
-            padding: 0;
-            height: 19px;
-            margin: 30px 2.5% 20px 2.5%;
-            float: left;
-            outline: none;
-          }
-          input[type="range"]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 3px;
-            cursor: pointer;
-            background: linear-gradient(to right, rgba(37, 138, 114, 0.6) var(--buffered-width), rgba(37, 138, 114, 0.2) var(--buffered-width));
-          }
-          input[type="range"]::before {
-            position: absolute;
-            content: "";
-            top: 8px;
-            left: 0;
-            width: var(--seek-before-width);
-            height: 3px;
-            background-color: #258A72;
-            cursor: pointer;
-          }
-          input[type="range"]::-webkit-slider-thumb {
-            position: relative;
-            -webkit-appearance: none;
-            box-sizing: content-box;
-            border: 1px solid #258A72;
-            height: 15px;
-            width: 15px;
-            border-radius: 50%;
-            background-color: #fff;
-            cursor: pointer;
-            margin: -7px 0 0 0; 
-          }
-          input[type="range"]:active::-webkit-slider-thumb {
-            transform: scale(1.2);
-            background: #258A72;
-          }
-          input[type="range"]::-moz-range-track {
-            width: 100%;
-            height: 3px;
-            cursor: pointer;
-            background: linear-gradient(to right, rgba(37, 138, 114, 0.6) var(--buffered-width), rgba(37, 138, 114, 0.2) var(--buffered-width));
-          }
-          input[type="range"]::-moz-range-progress {
-            background-color: #258A72;
-          }
-          input[type="range"]::-moz-focus-outer {
-            border: 0;
-          }
-          input[type="range"]::-moz-range-thumb {
-            box-sizing: content-box;
-            border: 1px solid #258A72;
-            height: 15px;
-            width: 15px;
-            border-radius: 50%;
-            background-color: #fff;
-            cursor: pointer;
-          }
-          input[type="range"]:active::-moz-range-thumb {
-            transform: scale(1.2);
-            background: #258A72;  
-          }
-          input[type="range"]::-ms-track {
-            width: 100%;
-            height: 3px;
-            cursor: pointer;
-            background: transparent;
-            border: solid transparent;
-            color: transparent;
-          }
-          input[type="range"]::-ms-fill-lower {
-            background-color: #258A72;
-          }
-          input[type="range"]::-ms-fill-upper {
-            background: linear-gradient(to right, rgba(37, 138, 114, 0.6) var(--buffered-width), rgba(37, 138, 114, 0.2) var(--buffered-width));
-          }
-          input[type="range"]::-ms-thumb {
-            box-sizing: content-box;
-            border: 1px solid #258A72;
-            height: 15px;
-            width: 15px;
-            border-radius: 50%;
-            background-color: #fff;
-            cursor: pointer;
-          }
-          input[type="range"]:active::-ms-thumb {
-            transform: scale(1.2);
-            background: #258A72;
-          }
-        </style>
-        <article class="audio-player-container" id="audio-player-container">
-          <div class="audio-player">
-            <audio src="" preload="metadata"></audio>
-            <button class="btn-play" id="play-icon"></button>
-            <div class="range-slider">
-              <span class="time" id="current-time">0:00</span>
-              <input type="range" class="progress-meter" id="seek-slider" value="0" max="100">
-              <span class="time" id="duration-time">0:00</span>
+      <section class="sounds">
+        <h2>Explore sounds from our library</h2>
+      
+        <article class="soundcard">
+          <div class="soundcard-info">
+            <img class="soundcard-img" src="./s1_Sandy Beach.jpg"/>
+            <div class="soundcard-title">
+              <h3>Sandy Beach</h3>
+              <p>Julius H</p>
             </div>
           </div>
+          <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/beach-sample.mp3?raw=true"></audio-player>
         </article>
-      </template>
+      
+
+        <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/crickets-sample.mp3?raw=true"></audio-player>
+
+        <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/mantrachants-sample.mp3?raw=true"></audio-player>
+
+        <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/rainstorm-sample.mp3?raw=true"></audio-player>
+
+        <audio-player data-src="https://github.com/rileydevdzn/audio-player-eq/blob/main/oceangulls-sample.mp3?raw=true"></audio-player>
+
+
+        <template>
+          <style>
+            #audio-player-container {
+              --seek-before-width: 0%;
+              --volume-before-width: 100%;
+              --buffered-width: 0%;
+           }
+            .audio-player {
+              width: 235px;
+              margin: 0 auto;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+           }
+            .btn-play {
+              width: 50px;
+              height: 50px;
+              padding: 8px;
+              border: none;
+              border-radius: 50%;
+              background-color: transparent;
+              cursor: pointer;
+            }
+            path {
+              stroke: #166351;
+           }
+            .range-slider {
+              margin-left: 22px;
+           }
+            .time {
+              display: inline-block;
+              width: 37px;
+              text-align: center;
+              font-size: 18px;
+              margin-top: 30.5px;
+              float: left;
+           }
+            input[type="range"] {
+              position: relative;
+              -webkit-appearance: none;
+              width: 48%;
+              margin: 0;
+              padding: 0;
+              height: 19px;
+              margin: 30px 2.5% 20px 2.5%;
+              float: left;
+              outline: none;
+            }
+            input[type="range"]::-webkit-slider-runnable-track {
+              width: 100%;
+              height: 3px;
+              cursor: pointer;
+              background: linear-gradient(to right, rgba(37, 138, 114, 0.6) var(--buffered-width), rgba(37, 138, 114, 0.2) var(--buffered-width));
+            }
+            input[type="range"]::before {
+              position: absolute;
+              content: "";
+              top: 8px;
+              left: 0;
+              width: var(--seek-before-width);
+              height: 3px;
+              background-color: #258A72;
+              cursor: pointer;
+            }
+            input[type="range"]::-webkit-slider-thumb {
+              position: relative;
+              -webkit-appearance: none;
+              box-sizing: content-box;
+              border: 1px solid #258A72;
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              background-color: #fff;
+              cursor: pointer;
+              margin: -7px 0 0 0; 
+            }
+            input[type="range"]:active::-webkit-slider-thumb {
+              transform: scale(1.2);
+              background: #258A72;
+            }
+            input[type="range"]::-moz-range-track {
+              width: 100%;
+              height: 3px;
+              cursor: pointer;
+              background: linear-gradient(to right, rgba(37, 138, 114, 0.6) var(--buffered-width), rgba(37, 138, 114, 0.2) var(--buffered-width));
+            }
+            input[type="range"]::-moz-range-progress {
+              background-color: #258A72;
+            }
+            input[type="range"]::-moz-focus-outer {
+              border: 0;
+            }
+            input[type="range"]::-moz-range-thumb {
+              box-sizing: content-box;
+              border: 1px solid #258A72;
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              background-color: #fff;
+              cursor: pointer;
+            }
+            input[type="range"]:active::-moz-range-thumb {
+              transform: scale(1.2);
+              background: #258A72;  
+            }
+            input[type="range"]::-ms-track {
+              width: 100%;
+              height: 3px;
+              cursor: pointer;
+              background: transparent;
+              border: solid transparent;
+              color: transparent;
+            } 
+            input[type="range"]::-ms-fill-lower {
+              background-color: #258A72;
+            } 
+            input[type="range"]::-ms-fill-upper {
+              background: linear-gradient(to right, rgba(37, 138, 114, 0.6) var(--buffered-width), rgba(37, 138, 114, 0.2) var(--buffered-width));
+            }
+            input[type="range"]::-ms-thumb {
+              box-sizing: content-box;
+              border: 1px solid #258A72;
+              height: 15px;
+              width: 15px;
+              border-radius: 50%;
+              background-color: #fff;
+              cursor: pointer;
+            }
+            input[type="range"]:active::-ms-thumb {
+              transform: scale(1.2);
+              background: #258A72;
+            }
+          </style>
+          <div class="audio-player-container" id="audio-player-container">
+            <div class="audio-player">
+              <audio src="" preload="metadata"></audio>
+              <button class="btn-play" id="play-icon"></button>
+              <div class="range-slider">
+                <span class="time" id="current-time">0:00</span>
+                <input type="range" class="progress-meter" id="seek-slider" value="0" max="100">
+                <span class="time" id="duration-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section>
     </main>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
