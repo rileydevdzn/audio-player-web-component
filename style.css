@@ -30,7 +30,7 @@ main {
   width: 1px;
 }
 
-.audio-player {
+/*.audio-player {
   --seek-before-width: 0%;
   --volume-before-width: 100%;
   --buffered-width: 0%;
@@ -41,7 +41,9 @@ main {
   background: hsla(224, 40%, 16%, 1);
   display: flex;
   align-items: center;
-  column-gap: 2.5rem;
+  justify-content: center;
+  column-gap: 0.5rem;
+  margin: 0 1rem;
 }
 
 .audio-img-wrapper {
@@ -52,7 +54,7 @@ main {
 .audio-img {
   width: 85%;
   display: block;
-  margin: -1rem 0 -0.75rem 1rem;
+  margin: -1rem 0 -0.5rem 1rem;
 }
 
 .volume {
@@ -61,75 +63,75 @@ main {
   align-items: center;
   justify-content: center;
   column-gap: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 .audio-info {
   width: 50%;
   height: 100%;
-  padding: 0.75rem 0 0.5rem 0;
+  padding: 0.75rem 0;
+  margin-right: 5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  row-gap: 2rem;  
+  justify-content: space-between; 
   position: relative;
 }
 
 .audio-track {
-  display: flex;
-  flex-direction: column-reverse;
-  row-gap: 0.75rem;
-}
-
-h2 {
-  font-size: 26px;
+  width: 100%;
 }
 
 .track-artist {
+  display: flex;
+  justify-content: space-between;
+}
+
+.artist-name {
   opacity: 0.7;
 }
 
 .artist-link {
-  position: absolute;
-  top: 0.75rem;
-  right: 3rem;
   font-size: 14px;
+  color: inherit;
+  text-decoration: none;
   display: flex;
   align-items: center;
   column-gap: 0.25rem;
   cursor: pointer;
-  text-decoration: none;
-  color: inherit;
+}
+
+h2 {
+  font-size: 26px;
+  margin-top: 0.5rem;
 }
 
 .audio-controls {
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  row-gap: 1.75rem;
+  row-gap: 1.5rem;
 }
 
 .duration {
-  width: 95%;
+  width: 100%;
   height: 25px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-size: 14px;
+  column-gap: 0.25rem;
 }
 
-
-/*--Audio Controls--*/
 button {
+  display: block;
   width: 60px;
   height: 60px;
-  padding: 4px 4px 4px 7px;
-  border-radius: 50%;
   background: #8D3DCC;
   border: none;
+  border-radius: 50%;
+  padding: 4px 4px 4px 7px;
+  margin: 0 auto;   
   cursor: pointer;
-  display: block;
-  margin: 0 auto;  
 }
 path {
   stroke: #fff;
@@ -146,9 +148,8 @@ path {
 .time {
   display: inline-block;
   width: 37px;
-  text-align: center;
   font-size: 18px;
-  float: left;
+  text-align: center;
 }
 
 #volume-slider {
@@ -169,53 +170,52 @@ path {
 
 input[type="range"] {
   display: inline-block;
-  position: relative;
-  -webkit-appearance: none;
-  width: 60%;
-  margin: 0;
-  padding: 0;
+  width: 55%;
   height: 19px;
-  float: left;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  position: relative;
   outline: none;
-  background: transparent;
+  -webkit-appearance: none; 
 }
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 3px;
-  cursor: pointer;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+  cursor: pointer;
 }
 input[type="range"]::before {
+  width: var(--seek-before-width);
+  height: 3px;
+  background-color: #fff;
   position: absolute;
   content: "";
   top: 7px;
   left: 0;
-  width: var(--seek-before-width);
-  height: 3px;
-  background-color: #fff;
   cursor: pointer;
 }
 input[type="range"]::-webkit-slider-thumb {
-  position: relative;
-  -webkit-appearance: none;
-  box-sizing: content-box;
-  border: 1px solid #E7CCFC;
-  height: 12px;
   width: 12px;
-  border-radius: 50%;
+  height: 12px;
   background-color: #fff;
-  cursor: pointer;
+  border: 1px solid #E7CCFC; 
+  border-radius: 50%;
   margin: -7px 0 0 0;
+  box-sizing: content-box;
+  position: relative;
+  -webkit-appearance: none;  
+  cursor: pointer;
 }
 input[type="range"]:active::-webkit-slider-thumb {
+  background-color: #fff;
   transform: scale(1.1);
-  background: #fff;
 }
 input[type="range"]::-moz-range-track {
   width: 100%;
   height: 3px;
-  cursor: pointer;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+  cursor: pointer;
 }
 input[type="range"]::-moz-range-progress {
   background-color: #fff;
@@ -224,25 +224,25 @@ input[type="range"]::-moz-focus-outer {
   border: 0;
 }
 input[type="range"]::-moz-range-thumb {
-  box-sizing: content-box;
-  border: 1px solid #fff;
-  height: 15px;
   width: 15px;
-  border-radius: 50%;
+  height: 15px;
   background-color: #fff;
+  border: 1px solid #fff;  
+  border-radius: 50%;
+  box-sizing: content-box;  
   cursor: pointer;
 }
 input[type="range"]:active::-moz-range-thumb {
+  background-color: #fff;
   transform: scale(1.1);
-  background: #fff;
 }
 input[type="range"]::-ms-track {
   width: 100%;
   height: 3px;
-  cursor: pointer;
-  background: transparent;
+  background-color: transparent;
   border: solid transparent;
   color: transparent;
+  cursor: pointer;
 }
 input[type="range"]::-ms-fill-lower {
   background-color: #fff;
@@ -251,15 +251,52 @@ input[type="range"]::-ms-fill-upper {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
 }
 input[type="range"]::-ms-thumb {
-  box-sizing: content-box;
-  border: 1px solid #fff;
-  height: 15px;
   width: 15px;
-  border-radius: 50%;
+  height: 15px;
   background-color: #fff;
+  border: 1px solid #fff;  
+  border-radius: 50%;
+  box-sizing: content-box;  
   cursor: pointer;
 }
 input[type="range"]:active::-ms-thumb {
+  background-color: #fff;
   transform: scale(1.1);
-  background: #fff;
 }
+
+@media (max-width: 719px) {
+  .audio-player {
+    width: 500px;
+    min-height: 300px;
+    border-radius: 16px;
+    padding: clamp(1.5rem, 1.0125rem + 2.2vw, 2rem);
+    flex-direction: column;
+    align-items: center;  
+    position: relative;
+  }
+  .audio-img-wrapper {
+    width: 0;
+    height: 0;
+  }
+  .audio-img {
+    display: none;
+  }
+  .volume {
+    width: 50%;
+    position: absolute;
+    top: 52%;
+    left: 35%;
+    z-index: 3;
+  }
+  .audio-info {
+    width: 85%;
+    height: 100%;
+    margin-right: 0;
+  }
+  .audio-controls {
+    row-gap: 2rem;
+  }
+  .btn-play {
+    margin: 0 auto 0 0;
+  }
+}*/

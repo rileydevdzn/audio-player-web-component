@@ -9,33 +9,298 @@
   <body>
     <main>
       <h1 class="sr-only">Custom JavaScript Audio Player</h1>
-      <article class="audio-player" id="audio-player">
-        <div class="audio-img-wrapper">
-          <img class="audio-img" src="./record image.svg" alt="record player"/>
-          <div class="volume">      
-            <button class="btn-mute" id="mute-icon"></button>
-            <input type="range" class="volume-bar" id="volume-slider" value="100" max="100"/>
-          </div>
-        </div>
 
-        <div class="audio-info">
-          <div class="audio-track">
-            <h2 class="track-title">Modern Chillout</h2>
-            <p class="track-artist">penguinmusic</p>
-            <a class="artist-link" href="https://pixabay.com/users/penguinmusic-24940186/">Artist<img class="external-link" src="./external-link.svg" alt="Hear more from this artist"/></a>
-          </div>
-          <div class="audio-controls">
-            <audio arc="" preload="metadata"></audio>
-            <button class="btn-play" id="play-icon"></button>
-            <div class="duration">
-              <span class="time" id="current-time">0:00</span>
-              <input type="range" class="duration-progress" id="seek-slider" value="0" max="100"/>
-              <span class="time" id="duration-time">0:00</span>
+      <audio-player data-src="https://github.com/rileydevdzn/audio-player-web-component/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true">
+        <!--<span slot="artist-name">ComaStudio</span>
+        <span slot="track-title">Funk It</span>-->
+      </audio-player>
+
+
+      <template>
+        <style>
+          .audio-player {
+            --seek-before-width: 0%;
+            --volume-before-width: 100%;
+            --buffered-width: 0%;
+            width: 700px;
+            height: 250px;
+            border-radius: 125px;
+            padding: 0.75rem;
+            background: hsla(224, 40%, 16%, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 0.5rem;
+            margin: 0 1rem;
+          }
+          .audio-img-wrapper {
+            width: 40%;
+            height: 100%;  
+          }
+          .audio-img {
+            width: 85%;
+            display: block;
+            margin: -1rem 0 -0.5rem 1rem;
+          }
+          .volume {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 0.5rem;
+          }
+          .audio-info {
+            width: 50%;
+            height: 100%;
+            padding: 0.75rem 0;
+            margin-right: 5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between; 
+            position: relative;
+          }
+          .audio-track {
+            width: 100%;
+          }
+          .track-artist {
+            display: flex;
+            justify-content: space-between;
+          }
+          .artist-name {
+            opacity: 0.7;
+          }
+          .artist-link {
+            font-size: 14px;
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            column-gap: 0.25rem;
+            cursor: pointer;
+          }
+          h2 {
+            font-size: 26px;
+            margin-top: 0.5rem;
+          }
+          .audio-controls {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            row-gap: 1.5rem;
+          }
+          .duration {
+            width: 100%;
+            height: 25px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            column-gap: 0.25rem;
+          }
+          button {
+            display: block;
+            width: 60px;
+            height: 60px;
+            background: #8D3DCC;
+            border: none;
+            border-radius: 50%;
+            padding: 4px 4px 4px 7px;
+            margin: 0 auto;   
+            cursor: pointer;
+          }
+          path {
+            stroke: #fff;
+          }
+          .btn-play path {
+            stroke-width: 2.5%;
+          }
+          .btn-mute {
+            width: 30px;
+            height: 30px;
+            margin: 0;
+          }
+          .time {
+            display: inline-block;
+            width: 37px;
+            font-size: 18px;
+            text-align: center;
+          } 
+          #volume-slider {
+            width: 25%;
+          } 
+          #volume-slider::-webkit-slider-runnable-track {
+            background: rgba(255, 255, 255, 0.6);
+          }
+          #volume-slider::-moz-range-track {
+            background: rgba(255, 255, 255, 0.6);
+          }
+          #volume-slider::-ms-fill-upper {
+            background: rgba(255, 255, 255, 0.6);
+          }
+          #volume-slider::before {
+            width: var(--volume-before-width);
+          }
+          input[type="range"] {
+            display: inline-block;
+            width: 55%;
+            height: 19px;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            outline: none;
+            -webkit-appearance: none; 
+          }
+          input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+            cursor: pointer;
+          } 
+          input[type="range"]::before {
+            width: var(--seek-before-width);
+            height: 3px;
+            background-color: #fff;
+            position: absolute;
+            content: "";
+            top: 7px;
+            left: 0;
+            cursor: pointer;
+          }
+          input[type="range"]::-webkit-slider-thumb {
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border: 1px solid #E7CCFC; 
+            border-radius: 50%;
+            margin: -7px 0 0 0;
+            box-sizing: content-box;
+            position: relative;
+            -webkit-appearance: none;  
+            cursor: pointer;
+          }
+          input[type="range"]:active::-webkit-slider-thumb {
+            background-color: #fff;
+            transform: scale(1.1);
+          }
+          input[type="range"]::-moz-range-track {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+            cursor: pointer;
+          }
+          input[type="range"]::-moz-range-progress {
+            background-color: #fff;
+          }
+          input[type="range"]::-moz-focus-outer {
+            border: 0;
+          }
+          input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border: 1px solid #fff;  
+            border-radius: 50%;
+            box-sizing: content-box;  
+            cursor: pointer;
+          }
+          input[type="range"]:active::-moz-range-thumb {
+            background-color: #fff;
+            transform: scale(1.1);
+          }
+          input[type="range"]::-ms-track {
+            width: 100%;
+            height: 3px;
+            background-color: transparent;
+            border: solid transparent;
+            color: transparent;
+            cursor: pointer;  
+          }
+          input[type="range"]::-ms-fill-lower {
+            background-color: #fff;
+          }
+          input[type="range"]::-ms-fill-upper {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+          }
+          input[type="range"]::-ms-thumb {
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border: 1px solid #fff;  
+            border-radius: 50%;
+            box-sizing: content-box;  
+            cursor: pointer;
+          }
+          input[type="range"]:active::-ms-thumb {
+            background-color: #fff;
+            transform: scale(1.1);
+          }
+          @media (max-width: 719px) {
+            .audio-player {
+              width: 500px;
+              min-height: 300px;
+              border-radius: 16px;
+              padding: clamp(1.5rem, 1.0125rem + 2.2vw, 2rem);
+              flex-direction: column;
+              align-items: center;  
+              position: relative;
+            }
+            .audio-img-wrapper {
+              width: 0;
+              height: 0;
+            }
+            .audio-img {
+              display: none;
+            }
+            .volume {
+              width: 50%;
+              position: absolute;
+              top: 52%;
+              left: 35%;
+              z-index: 3;
+            }
+            .audio-info {
+              width: 85%;
+              height: 100%;
+              margin-right: 0;
+            }
+            .audio-controls {
+              row-gap: 2rem;
+            }
+            .btn-play {
+              margin: 0 auto 0 0;
+            }     
+          }
+      </style>
+        <article class="audio-player" id="audio-player">
+          <div class="audio-img-wrapper">
+            <img class="audio-img" src="./record image.svg" alt="record player"/>
+            <div class="volume">      
+              <button class="btn-mute" id="mute-icon"></button>
+              <input type="range" class="volume-bar" id="volume-slider" value="100" max="100"/>
             </div>
           </div>
-        </div>
-      </article>
-
+          <div class="audio-info">
+            <div class="audio-track">
+              <div class="track-artist">
+                <p class="artist-name"><slot name="artist-name">penguinmusic</slot></p>
+                <a class="artist-link" href="https://pixabay.com/users/penguinmusic-24940186/">Artist<img class="external-link" src="./external-link.svg" alt="Hear more from this artist"/></a>
+              </div>
+              <h2 class="track-title"><slot name="track-title">Modern Chillout</slot></h2>
+            </div>
+            <div class="audio-controls">
+              <audio src="https://github.com/rileydevdzn/audio-player-web-component/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true" preload="metadata"></audio>
+              <button class="btn-play" id="play-icon"></button>
+              <div class="duration">
+                <span class="time" id="current-time">0:00</span>
+                <input type="range" class="duration-progress" id="seek-slider" value="0" max="100"/>
+                <span class="time" id="duration-time">0:00</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </template>
     </main>
 
     <script type="module" src="./script.js"></script>
