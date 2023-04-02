@@ -1,2 +1,2 @@
-# audio-player-eq
+# Custom JavaScript audio player
  
