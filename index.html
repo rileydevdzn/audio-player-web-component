@@ -11,14 +11,14 @@
       <h1 class="sr-only">Custom JavaScript Audio Player</h1>
 
       <audio-player data-src="https://github.com/rileydevdzn/audio-player-web-component/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true">
-        <!--<span slot="artist-name">ComaStudio</span>
-        <span slot="track-title">Funk It</span>-->
+        <span slot="artist-name">penguinMusic</span>
+        <span slot="track-title">Modern Chillout</span>
       </audio-player>
 
 
       <template>
         <style>
-          .audio-player {
+          #audio-player {
             --seek-before-width: 0%;
             --volume-before-width: 100%;
             --buffered-width: 0%;
@@ -172,7 +172,7 @@
             width: 12px;
             height: 12px;
             background-color: #fff;
-            border: 1px solid #E7CCFC; 
+            border: 1px solid #8D3DCC; 
             border-radius: 50%;
             margin: -7px 0 0 0;
             box-sizing: content-box;
@@ -237,8 +237,8 @@
             transform: scale(1.1);
           }
           @media (max-width: 719px) {
-            .audio-player {
-              width: 500px;
+            #audio-player {
+              width: clamp(16.75rem, 5.15rem + 58vw, 31.25rem);
               min-height: 300px;
               border-radius: 16px;
               padding: clamp(1.5rem, 1.0125rem + 2.2vw, 2rem);
@@ -284,10 +284,10 @@
           <div class="audio-info">
             <div class="audio-track">
               <div class="track-artist">
-                <p class="artist-name"><slot name="artist-name">penguinmusic</slot></p>
+                <p class="artist-name"><slot name="artist-name"></slot></p>
                 <a class="artist-link" href="https://pixabay.com/users/penguinmusic-24940186/">Artist<img class="external-link" src="./external-link.svg" alt="Hear more from this artist"/></a>
               </div>
-              <h2 class="track-title"><slot name="track-title">Modern Chillout</slot></h2>
+              <h2 class="track-title"><slot name="track-title"></slot></h2>
             </div>
             <div class="audio-controls">
               <audio src="https://github.com/rileydevdzn/audio-player-web-component/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true" preload="metadata"></audio>
