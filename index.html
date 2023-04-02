@@ -8,31 +8,30 @@
 
   <body>
     <main>
-      <h1 class="sr-only">Custom JavaScript Audio Player by Riley</h1>
+      <h1 class="sr-only">Custom JavaScript Audio Player</h1>
       <article class="audio-player" id="audio-player">
-        <img class="audio-img" src="./record image.svg" alt="record player"/>
-        
+        <div class="audio-img-wrapper">
+          <img class="audio-img" src="./record image.svg" alt="record player"/>
+          <div class="volume">      
+            <button class="btn-mute" id="mute-icon"></button>
+            <input type="range" class="volume-bar" id="volume-slider" value="100" max="100"/>
+          </div>
+        </div>
+
         <div class="audio-info">
           <div class="audio-track">
             <h2 class="track-title">Modern Chillout</h2>
             <p class="track-artist">penguinmusic</p>
+            <a class="artist-link" href="https://pixabay.com/users/penguinmusic-24940186/">Artist<img class="external-link" src="./external-link.svg" alt="Hear more from this artist"/></a>
           </div>
-          
           <div class="audio-controls">
             <audio arc="" preload="metadata"></audio>
-            
+            <button class="btn-play" id="play-icon"></button>
             <div class="duration">
               <span class="time" id="current-time">0:00</span>
               <input type="range" class="duration-progress" id="seek-slider" value="0" max="100"/>
               <span class="time" id="duration-time">0:00</span>
             </div>
-            <div class="playback-and-volume">
-              <button class="btn-play" id="play-icon"></button>
-              <div class="volume">      
-                <button class="btn-mute" id="mute-icon"></button>
-                <input type="range" class="volume-bar" id="volume-slider" value="100" max="100"/>
-              </div>
-            </div>  
           </div>
         </div>
       </article>
