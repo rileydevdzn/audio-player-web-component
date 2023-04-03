@@ -28,6 +28,7 @@ const everything = function(element) {
     
     let playState = 'play';
     let muteState = 'unmute';
+    //rAF = request animation frame
     let rAF = null;
 
     audio.src = element.getAttribute('data-src');
@@ -38,7 +39,7 @@ const everything = function(element) {
         renderer: 'svg',
         loop: false,
         autoplay: false,
-        name: "Play Animation",
+        name: "Play Button Animation",
     });
           
     const muteAnimation = lottieWeb.loadAnimation({
@@ -47,14 +48,14 @@ const everything = function(element) {
         renderer: 'svg',
         loop: false,
         autoplay: false,
-        name: "Mute Animation",
+        name: "Mute Button Animation",
     });
           
-    playAnimation.goToAndStop(14, true);
+    playAnimation.goToAndStop(15, true);
 
     const whilePlaying = () => {
         seekSlider.value = Math.floor(audio.currentTime);
-        currentTimeContainer.textContent = calculateTime(seekSlider.value);
+        currentTimeContainer.innerText = calculateTime(seekSlider.value);
         audioPlayerContainer.style.setProperty('--seek-before-width', `${seekSlider.value / seekSlider.max * 100}%`);
         rAF = requestAnimationFrame(whilePlaying);
     }
@@ -72,7 +73,7 @@ const everything = function(element) {
     }
         
     const displayDuration = () => {
-        durationContainer.textContent = calculateTime(audio.duration);
+        durationContainer.innerText = calculateTime(audio.duration);
     }
         
     const setSliderMax = () => {
@@ -99,12 +100,12 @@ const everything = function(element) {
     playBtnContainer.addEventListener('click', () => {
         if(playState === 'play') {
             audio.play();
-            playAnimation.playSegments([14, 27], true);
+            playAnimation.playSegments([15, 27], true);
             requestAnimationFrame(whilePlaying);
             playState = 'pause';
         } else {
             audio.pause();
-            playAnimation.playSegments([0, 14], true);
+            playAnimation.playSegments([0, 15], true);
             cancelAnimationFrame(rAF);
             playState = 'play';
         }
