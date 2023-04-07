@@ -21,7 +21,7 @@
 
 ### Links
 
-- View live page: [Custom audio player](https://rileydevdzn.github.io/audio-player-web-component/)
+- View live page: [Custom audio player](https://rileydevdzn.github.io/custom-audio-player/)
 
 ### The challenge
 
