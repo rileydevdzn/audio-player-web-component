@@ -8,8 +8,8 @@
 ## Table of contents
 
 - [Overview](#overview)
-  - [The challenge](#the-challenge)
   - [Links](#links)
+  - [The challenge](#the-challenge)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
@@ -18,6 +18,10 @@
 - [Author](#author)
 
 ## Overview
+
+### Links
+
+- View live page: [Custom audio player](https://rileydevdzn.github.io/audio-player-web-component/)
 
 ### The challenge
 
@@ -45,10 +49,6 @@ I wanted to keep it simple, so I decided on the following features:
     height="350px">
   <p><em><em></p>
 </div>-->
-
-### Links
-
-- See it in the browser: [Custom JavaScript audio player](https://rileydevdzn.github.io/audio-player-web-component/)
 
 ## My process
 
@@ -188,4 +188,5 @@ I created slots for the audio track title and artist name, and added a `data-src
 
 ## Author
 
+- Website - [Riley Portfolio](https://rileydevdzn.webflow.io)
 - Frontend Mentor - [@rileydevdzn](https://www.frontendmentor.io/profile/rileydevdzn)
