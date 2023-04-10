@@ -1,3 +1,5 @@
+# Custom JavaScript Audio Player
+
 <div align="center">
   <img 
     src="./audio-player-web-cmp.png"
