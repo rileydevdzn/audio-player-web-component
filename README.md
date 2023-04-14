@@ -111,7 +111,7 @@ Below are stills of each icon from the final build. Click on the collapsed secti
     <img
       src="./pause.gif"
       alt="Demo of animated play-pause icons for play button"
-      width="85px">
+      width="75px">
     <p><em>Animated play/pause icons for play button</em></p>
   </div>
   </br>
@@ -119,7 +119,7 @@ Below are stills of each icon from the final build. Click on the collapsed secti
     <img
       src="./no-sound.gif"
       alt="Demo of animated unmute-mute icons for mute button"
-      width="85px">
+      width="75px">
     <p><em>Animated unmute/mute icons for mute button</em></p>
   </div>
 </div>
