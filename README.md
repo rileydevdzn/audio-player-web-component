@@ -77,11 +77,11 @@ Below are stills of each icon from the final build. Click on the collapsed secti
   <img
     src="./playbtn-play.png"
     alt="Play button, play icon"
-    width="75px">
+    width="85px">
   <img
     src="./playbtn-pause.png"
     alt="Play button, pause icon"
-    width="75px">
+    width="85px">
   <p><em>Play button: play and pause icons</em></p>
 </div>
 
@@ -91,11 +91,11 @@ Below are stills of each icon from the final build. Click on the collapsed secti
   <img
     src="./mutebtn-unmute.png"
     alt="Mute button, unmute icon"
-    width="75px">
+    width="85px">
   <img
     src="./mutebtn-mute.png"
     alt="Mute button, mute icon"
-    width="75px">
+    width="85px">
   <p><em>Mute button: unmute and mute icons</em></p>
 </div>
 
@@ -110,7 +110,7 @@ Below are stills of each icon from the final build. Click on the collapsed secti
     <img
       src="./pause.gif"
       alt="Demo of animated play-pause icons for play button"
-      width="100px">
+      width="85px">
     <p><em>Animated play/pause icons for play button</em></p>
   </div>
   </br>
@@ -118,7 +118,7 @@ Below are stills of each icon from the final build. Click on the collapsed secti
     <img
       src="./no-sound.gif"
       alt="Demo of animated unmute-mute icons for mute button"
-      width="100px">
+      width="85px">
     <p><em>Animated unmute/mute icons for mute button</em></p>
   </div>
 </div>
@@ -138,7 +138,7 @@ Now a user can click or drag the slider handle anywhere along the range input an
     <img
       src="./audio-player-seekslider-animxn.gif"
       alt="Demo of seek slider, choosing different points along the track to start playback"
-      width="400px"
+      width="500px"
       max-width="100%">
     <p><em>Seek slider demo</em></p>
   </div>
@@ -157,7 +157,7 @@ Since web components encapsulate their contents, separating them from the rest o
 
 This project gave me an opportunity to try out new techniques and expand my JavaScript skills. Figuring out each piece of the puzzle – getting the JSON animations to play, retrieving metadata and updating the display times, integrating the seek slider and adjusting the volume controls – was its own unique challenge. Creating the web component and working with the shadow DOM was the most interesting part of the project for me and also the most satisfying.
 
-**<small>Fun fact: The stylized record player image in the audio player is an SVG that I created with Figma as a side-challenge.</small>**
+*<small>The stylized record player image in the audio player is an SVG that I created with Figma as a side-challenge.</small>*
 
 </br>
 
@@ -255,8 +255,6 @@ In my `<audio>` element, I included the `preload="metadata"` attribute to instru
 
 The duration property is calculated in seconds, so I created a function to convert the duration time into minutes and seconds, then created another function to display the result.
 
-</br>
-
 ```js
 const audio = shadow.querySelector('audio');
 
@@ -347,7 +345,7 @@ After building out all of the audio player's functionality, I decided I wanted t
 
 I created a custom element `<audio-player>` and defined it using the browser APIs, encapsulated it using the shadow DOM and used HTML templates (`<template>` and `<slot>` elements) to create my resuable audio player.
 
-Defining the custom element
+**Defining the custom element**
 
 ```js
 class AudioPlayer extends HTMLElement {
@@ -367,7 +365,7 @@ class AudioPlayer extends HTMLElement {
 customElements.define('audio-player', AudioPlayer);
 ```
 
-Working with the shadow DOM
+**Working with the shadow DOM**
 
 ```js
 const everything = function(element) {  
@@ -384,7 +382,7 @@ const everything = function(element) {
 customElements.define('audio-player', AudioPlayer);
 ```
 
-Using HTML templates
+**Using HTML templates**
 
 ```html
 <audio-player data-src="https://github.com/rileydevdzn/custom-audio-player/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true">
