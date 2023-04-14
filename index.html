@@ -19,53 +19,71 @@
 
       <template>
         <style>
+          .sr-only {
+            clip: rect(0 0 0 0); 
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap; 
+            width: 1px;
+          }
           #audio-player {
             --seek-before-width: 0%;
             --volume-before-width: 100%;
-            --buffered-width: 0%;
             width: 700px;
             height: 250px;
             border-radius: 125px;
-            padding: 0.75rem;
+            padding: 1rem;
             background: hsla(224, 40%, 16%, 1);
             display: flex;
             align-items: center;
-            justify-content: center;
-            column-gap: 0.5rem;
-            margin: 0 1rem;
+            
+            margin: 0.5rem 1rem;
           }
           .audio-img-wrapper {
             width: 40%;
-            height: 100%;  
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1.25rem 2.75rem 0 1rem;  
           }
           .audio-img {
             width: 85%;
             display: block;
-            margin: -1rem 0 0.35rem 1rem;
+            margin: -1.5rem 0 -0.1rem 0;
           }
-          .volume {
+          .volume-controls {
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            column-gap: 0.5rem;
+            column-gap: 0.75rem;
           }
-          .audio-info {
-            width: 50%;
+          .audio-player {
+            width: 40%;
+            margin: 0 0.75rem 1.25rem 0;
+          }
+          .audio-track-info {
+            width: 100%;
             height: 100%;
             padding: 0.75rem 0;
             margin-right: 5rem;
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: flex-start;
             justify-content: space-between; 
             position: relative;
           }
-          .audio-track {
-            width: 100%;
+          h2 {
+            font-size: 26px;
+            margin: 0.5rem 0 0.75rem 0;
           }
-          .track-artist {
+          .artist-info {
+            width: 100%;
             display: flex;
+            align-items: center;
             justify-content: space-between;
           }
           .artist-name {
@@ -80,18 +98,13 @@
             column-gap: 0.35rem;
             cursor: pointer;
           }
-          h2 {
-            font-size: 26px;
-            margin-top: 0.5rem;
-          }
-          .audio-controls {
+          .track-controls {
             width: 100%;
             display: flex;
             flex-direction: column;
-            row-gap: 1.5rem;
-            margin-bottom: 0.75rem;
+            row-gap: 2.25rem;
           }
-          .duration {
+          .track-progress-wrapper {
             width: 100%;
             height: 25px;
             font-size: 14px;
@@ -127,22 +140,13 @@
             width: 37px;
             font-size: 18px;
             text-align: center;
-          } 
+          }
           #volume-slider {
             width: 25%;
           } 
-          #volume-slider::-webkit-slider-runnable-track {
-            background: rgba(255, 255, 255, 0.6);
-          }
-          #volume-slider::-moz-range-track {
-            background: rgba(255, 255, 255, 0.6);
-          }
-          #volume-slider::-ms-fill-upper {
-            background: rgba(255, 255, 255, 0.6);
-          }
           #volume-slider::before {
             width: var(--volume-before-width);
-          }
+          } 
           input[type="range"] {
             display: inline-block;
             width: 55%;
@@ -152,12 +156,11 @@
             margin: 0;
             position: relative;
             outline: none;
-            -webkit-appearance: none; 
           }
           input[type="range"]::-webkit-slider-runnable-track {
             width: 100%;
             height: 3px;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+            background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
           } 
           input[type="range"]::before {
@@ -174,9 +177,8 @@
             width: 12px;
             height: 12px;
             background-color: #fff;
-            border: 1px solid #8D3DCC; 
             border-radius: 50%;
-            margin: -7px 0 0 0;
+            margin: -8px 4px 0 0;
             box-sizing: content-box;
             position: relative;
             -webkit-appearance: none;  
@@ -189,7 +191,7 @@
           input[type="range"]::-moz-range-track {
             width: 100%;
             height: 3px;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+            background: rgba(255, 255, 255, 0.5);
             cursor: pointer;
           }
           input[type="range"]::-moz-range-progress {
@@ -199,10 +201,9 @@
             border: 0;
           }
           input[type="range"]::-moz-range-thumb {
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-color: #fff;
-            border: 1px solid #fff;  
             border-radius: 50%;
             box-sizing: content-box;  
             cursor: pointer;
@@ -223,13 +224,12 @@
             background-color: #fff;
           }
           input[type="range"]::-ms-fill-upper {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0.6) var(--buffered-width), rgba(255, 255, 255, 0.4) var(--buffered-width));
+            background: rgba(255, 255, 255, 0.5);
           }
           input[type="range"]::-ms-thumb {
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-color: #fff;
-            border: 1px solid #fff;  
             border-radius: 50%;
             box-sizing: content-box;  
             cursor: pointer;
@@ -239,7 +239,7 @@
             transform: scale(1.1);
           }
           @media (max-width: 719px) {
-            #audio-player {
+            #audio-player-container {
               width: clamp(16.75rem, 5.15rem + 58vw, 31.25rem);
               min-height: 300px;
               border-radius: 16px;
@@ -255,49 +255,49 @@
             .audio-img {
               display: none;
             }
-            .volume {
-              width: 50%;
+            .volume-controls {
+              width: 60%;
               position: absolute;
-              top: 58%;
-              left: 49%;
+              top: 49%;
+              left: 42%;
               z-index: 3;
             }
-            .audio-info {
+            .audio-player {
               width: 85%;
               height: 100%;
-              margin-right: 0;
             }
-            .audio-controls {
-              row-gap: 2rem;
-              margin-bottom: 0.5rem;
+            .audio-track-info {
+              height: auto;
             }
             .btn-play {
-              margin: 0 auto 0 0;
-            }     
+            margin: 0 auto 0 10%;
+            }
           }
       </style>
-        <article class="audio-player" id="audio-player">
+        <article class="audio-player-container" id="audio-player">
           <div class="audio-img-wrapper">
             <img class="audio-img" src="./record image.svg" alt="record player"/>
-            <div class="volume">      
+            <div class="volume-controls">
               <button class="btn-mute" id="mute-btn"></button>
-              <input type="range" class="volume-bar" id="volume-slider" value="100" max="100"/>
+              <input type="range" class="volume-bar" id="volume-slider" max="100" value="100"/>
+              <label for="volume-slider" class="sr-only">Volume</label>
             </div>
           </div>
-          <div class="audio-info">
-            <div class="audio-track">
-              <div class="track-artist">
+          <div class="audio-player">
+            <div class="audio-track-info">
+              <h2 class="track-title"><slot name="track-title"></slot></h2>
+              <div class="artist-info">
                 <p class="artist-name"><slot name="artist-name"></slot></p>
                 <a class="artist-link" href="https://pixabay.com/users/penguinmusic-24940186/">Artist<img class="external-link" src="./external-link.svg" alt="Hear more from this artist"/></a>
               </div>
-              <h2 class="track-title"><slot name="track-title"></slot></h2>
             </div>
-            <div class="audio-controls">
+            <div class="track-controls">
               <audio src="" preload="metadata"></audio>
               <button class="btn-play" id="play-btn"></button>
-              <div class="duration">
+              <div class="track-progress-wrapper">
                 <span class="time" id="current-time">0:00</span>
-                <input type="range" class="duration-progress" id="seek-slider" value="0" max="100"/>
+                <input type="range" class="progress-bar" id="seek-slider" min="0" max="100" value="0"/>
+                <label for="progress-slider" class="sr-only">Track Progress</label>
                 <span class="time" id="duration-time">0:00</span>
               </div>
             </div>

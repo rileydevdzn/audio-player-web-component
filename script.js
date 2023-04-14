@@ -92,12 +92,10 @@ const everything = function(element) {
     if (audio.readyState > 0) {
       displayDuration();
       setSliderMax();
-      /*displayBufferedAmount();*/
     } else {
       audio.addEventListener('loadedmetadata', () => {
           displayDuration();
           setSliderMax();
-          /*displayBufferedAmount();*/
       });
     }
     // While audio is playing, update seek slider, current time, rAF
