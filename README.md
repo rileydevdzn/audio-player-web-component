@@ -2,7 +2,9 @@
 
 <div align="center">
   <img 
-    src="./audio-player-web-cmp.png"
+    srcset="./audio-player-webcmp-crop.png 1876w, ./audio-player-webcmp.png 2824w"
+    sizes="(max-width: 1200px) 1876px, 2824px"
+    src="./audio-player-webcmp.png"
     alt="Custom audio player web component, shown as a single component over starry night sky background, queued up to the song Modern Chillout from penguin music"
     width="100%">
 </div>
@@ -63,70 +65,91 @@ View live page: [Custom audio player](https://rileydevdzn.github.io/custom-audio
 
 #### *Animated icons for play and mute buttons*
 
+For both the play and mute buttons, I needed to swap between two states, both visually and functionally. For example, the play icon should display when the audio is paused, and the pause icon should display when the audio is playing.
 
+There are a couple different ways to do this, I chose to explore animated icons so I could work with JSON animations in this project.
 
-**** GIF of each animated icon?
+Below are stills of each icon from the final build. Click on the collapsed section to see the animated versions. 
+
+</br>
+
+<div align="center">
+  <img
+    src="./playbtn-play.png"
+    alt="Play button, play icon"
+    width="75px">
+  <img
+    src="./playbtn-pause.png"
+    alt="Play button, pause icon"
+    width="75px">
+  <p><em>Play button: play and pause icons</em></p>
+</div>
+
+</br>
+
+<div align="center">
+  <img
+    src="./mutebtn-unmute.png"
+    alt="Mute button, unmute icon"
+    width="75px">
+  <img
+    src="./mutebtn-mute.png"
+    alt="Mute button, mute icon"
+    width="75px">
+  <p><em>Mute button: unmute and mute icons</em></p>
+</div>
+
+</br>
+
+<details>
+<summary>See the animated versions from Icons8</summary>
+</br>
+</br>
+<div align="center">
+  <div align="center">
+    <img
+      src="./pause.gif"
+      alt="Demo of animated play-pause icons for play button"
+      width="100px">
+    <p><em>Animated play/pause icons for play button</em></p>
+  </div>
+  </br>
+  <div align="center">
+    <img
+      src="./no-sound.gif"
+      alt="Demo of animated unmute-mute icons for mute button"
+      width="100px">
+    <p><em>Animated unmute/mute icons for mute button</em></p>
+  </div>
+</div>
+</details>
+
+</br>
 
 </br>
 
 #### *Integrated seek slider*
 
-**** GIF of dragging seek slider??
+In my first iteration of the design I used a simple progress bar along with the current time and duration displays. I added a seek slider to improve user control of the audio player, and I enjoyed the challenge of figuring out how to implement one.
+
+Now a user can click or drag the slider handle anywhere along the range input and choose what starting point they want the audio to play from.
+
+<div align="center">
+    <img
+      src="./audio-player-seekslider-animxn.gif"
+      alt="Demo of seek slider, choosing different points along the track to start playback"
+      width="400px"
+      max-width="100%">
+    <p><em>Seek slider demo</em></p>
+  </div>
 
 </br>
 
 #### *Creating a web component*
 
+My original motivation for creating a custom audio player was to fulfill a need for one of my projects. And once I had created a single audio player, I wanted to explore web components so that I could create a reusable version if I wanted or needed multiple audio players on a page.
 
-
-
-Where this...
-
-```html
-<template>
-  <style></style>
-  <article class="audio-player-container" id="audio-player">
-    <div class="audio-img-wrapper">
-      <img class="audio-img" src="./record image.svg" alt="record player"/>
-      <div class="volume-controls">
-        <button class="btn-mute" id="mute-btn"></button>
-        <input type="range" class="volume-bar" id="volume-slider" max="100" value="100"/>
-        <label for="volume-slider" class="sr-only">Volume</label>
-      </div>
-    </div>
-    <div class="audio-player">
-      <div class="audio-track-info">
-        <h2 class="track-title"><slot name="track-title"></slot></h2>
-        <div class="artist-info">
-          <p class="artist-name"><slot name="artist-name"></slot></p>
-          <a class="artist-link" href="https://pixabay.com/users/penguinmusic-24940186/">Artist<img class="external-link" src="./external-link.svg" alt="Hear more from this artist"/></a>
-        </div>
-      </div>
-      <div class="track-controls">
-        <audio src="" preload="metadata"></audio>
-        <button class="btn-play" id="play-btn"></button>
-        <div class="track-progress-wrapper">
-          <span class="time" id="current-time">0:00</span>
-          <input type="range" class="progress-bar" id="seek-slider" min="0" max="100" value="0"/>
-          <label for="progress-slider" class="sr-only">Track Progress</label>
-          <span class="time" id="duration-time">0:00</span>
-        </div>
-      </div>
-   </div>
-  </article>
-</template>
-```
-
-...is used with JavaScript to create this reusable custom element...
-
-```html
-<audio-player data-src="https://github.com/rileydevdzn/custom-audio-player/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true">
-  <span slot="artist-name">penguinMusic</span>
-  <span slot="track-title">Modern Chillout</span>
-</audio-player>
-```
-
-...that I can update, reuse and easily drop anywhere in my document.
+Since web components encapsulate their contents, separating them from the rest of the page, this was an easy way to create reusable code while avoiding the mess repeated declarations for the same element can create.
 
 </br>
 
@@ -142,9 +165,13 @@ This project gave me an opportunity to try out new techniques and expand my Java
 
 1. Using animated icons for the play and mute buttons
 
-I wanted to use a single button a user could click to pause or play the audio. There are a few ways to do this both functionally and visually; I chose to use JSON animations for my icons. I found a play/pause animation and a mute/unmute animation on Icons8.
+I wanted to use a single button a user could click to pause or play the audio. There are a few ways to do this both functionally and visually; I chose to use JSON animations for my icons. I found a play/pause animation and a mute/unmute animation on Icons8 I liked.
 
 First, I imported the Lottie library from Skypack and set up my variables for each button and to store its current state. Then I used the Lottie `loadAnimation()` method to load the animation, setting its source path, format for render, and whether to loop and/or autoplay the animation.  
+
+</br>
+<details>
+<summary>See the code</summary>
 
 ```js
 import lottieWeb from 'https://cdn.skypack.dev/lottie-web';
@@ -174,8 +201,14 @@ const muteAnimation = lottieWeb.loadAnimation({
     name: "Mute Button Animation",
 });
 ```
+</details>
+</br>
 
 Next I included the `goToAndStop()` method to initially show the play state, then switch to the pause state on click. I then added an event listener to each of the buttons and specified which frames of the animation to play for each state. It took a bit of trial and error for the correct frame timing to get the exact look I was going for.
+
+</br>
+<details>
+<summary>See the code</summary>
 
 ```js
 playAnimation.goToAndStop(15, true);
@@ -207,6 +240,7 @@ muteBtnContainer.addEventListener('click', () => {
 });
 ```
 
+</details>
 </br>
 
 2. Calculating track duration
@@ -214,12 +248,14 @@ muteBtnContainer.addEventListener('click', () => {
 In my `<audio>` element, I included the `preload="metadata"` attribute to instruct the browser to load the audio file metadata up front (if available), and then display the duration property from the HTMLAudioElement.
 
 ```html
-<audio src="https://github.com/rileydevdzn/custom-audio-player/blob/main/penguinmusic-modern-chillout-future-calm-12641.mp3?raw=true" preload="metadata"></audio>
+<audio src="" preload="metadata"></audio>
 ```
 
-(In the final build, the `src` attribute of the `<audio>` element is blank because I used the `data-src` attribute on my web component to specify the path.)
+(In the final build, the `src` attribute of the `<audio>` element is blank because I used the `data-src` attribute on my `<audio-player>` custom element to specify the path.)
 
 The duration property is calculated in seconds, so I created a function to convert the duration time into minutes and seconds, then created another function to display the result.
+
+</br>
 
 ```js
 const audio = shadow.querySelector('audio');
@@ -268,6 +304,10 @@ Next, I needed to update the current time, showing the playback position of the 
 
 At the same time, I also needed to update the seek slider's value when the user drags the handle. I created a couple of functions to handle all of this, along with two event listeners: one for updating while the user was dragging the slider handle (input event) and a second to update after the user stopped (change event). 
 
+</br>
+<details>
+<summary>See the code</summary>
+
 ```js
 // While audio is playing, update seek slider, current time, rAF
 const whilePlaying = () => {
@@ -298,6 +338,7 @@ seekSlider.addEventListener('change', () => {
 });
 ```
 
+</details>
 </br>
 
 4. Turning the audio player into a web component
@@ -365,3 +406,9 @@ Now that I've created an audio player web component, my next challenge will be i
 ## Author
 
 - Riley - [View Portfolio](https://rileydevdzn.webflow.io)
+
+
+<!-- Icon links
+play/pause icon: https://icons8.com/free-animated-icons/pause
+unmute/mute icon: https://icons8.com/free-animated-icons/no-sound
+-->
