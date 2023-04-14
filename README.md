@@ -20,6 +20,7 @@
   - [Features](#features)
   - [Challenges](#challenges)
   - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
 - [Author](#author)
 
 </br>
